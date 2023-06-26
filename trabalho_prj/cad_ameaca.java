@@ -5,6 +5,12 @@ package trabalho_prj;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 import javax.swing.JOptionPane;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JSpinner;
 /**
  *
  * @author Vinicius
@@ -15,6 +21,7 @@ public class cad_ameaca extends javax.swing.JDialog {
     private boolean confirmado;
     /**
      * Creates new form cad_ameaca
+     * @wbp.parser.constructor
      */
     public cad_ameaca(java.awt.Frame parent, ExecutarCadastro executarCadastro, Ameaca ameaca) {
         super(parent, true);
@@ -94,7 +101,7 @@ public class cad_ameaca extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Adicionar NumCVE");
+        jLabel1.setText("Número CVE");
 
         jLabel2.setText("Produto:");
 
@@ -111,88 +118,98 @@ public class cad_ameaca extends javax.swing.JDialog {
         jLabel8.setText("Solução");
         
         jLabel9.setText("Consequência");
+        
+        JList list = new JList();
+        
+        JList list_1 = new JList();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(36, 36, 36)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel9))
-                            .addGap(26, 26, 26)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(aNumCve, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(aProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(aVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(aTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(aCriticidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(aData, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(aPathCorrecao, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(aSolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(aConsequencia, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addContainerGap(45, Short.MAX_VALUE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonConfirmar)
-                    .addGap(26, 26, 26))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap(223, Short.MAX_VALUE)
+        			.addComponent(buttonConfirmar)
+        			.addGap(26))
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(34)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(jLabel8)
+        				.addComponent(jLabel9)
+        				.addComponent(jLabel7)
+        				.addComponent(jLabel6)
+        				.addComponent(jLabel5)
+        				.addComponent(jLabel4)
+        				.addComponent(jLabel3)
+        				.addComponent(jLabel2)
+        				.addComponent(jLabel1))
+        			.addGap(26)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(75)
+        					.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(aNumCve, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(aProduto, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(aVersao, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(aTipo, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(aCriticidade, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(aData, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(aPathCorrecao, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(aSolucao, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(aConsequencia, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(47, Short.MAX_VALUE))
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(138)
+        			.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(187, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-            		 .addGap(27, 27, 27)
-                     .addComponent(jLabel1)
-                     .addGap(18, 18, 18)
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                         .addComponent(aNumCve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addComponent(jLabel2))
-                     .addGap(18, 18, 18)
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                         .addComponent(aProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addComponent(jLabel3))
-                     .addGap(18, 18, 18)
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                         .addComponent(aVersao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addComponent(jLabel4))
-                     .addGap(18, 18, 18)
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                         .addComponent(aTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addComponent(jLabel5))
-                     .addGap(18, 18, 18)
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                         .addComponent(aCriticidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addComponent(jLabel6))
-                     .addGap(18, 18, 18)
-                     .addComponent(aData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                          .addComponent(aPathCorrecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                          .addComponent(jLabel7))
-                     .addGap(18, 18, 18)
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                          .addComponent(aSolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                          .addComponent(jLabel8))
-                     .addGap(18, 18, 18)
-                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                          .addComponent(aConsequencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                          .addComponent(jLabel9))
-                     .addGap(18, 18, 18)
-                     
-                    .addComponent(buttonConfirmar)
-                    .addGap(26, 26, 26))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(27)
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(aNumCve, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel1))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(aProduto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel2))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(aVersao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel3))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(aTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel4))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(aCriticidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel5))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(aData, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel6))
+        			.addPreferredGap(ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(aPathCorrecao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel7))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(aSolucao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel8))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(aConsequencia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel9))
+        			.addGap(18)
+        			.addComponent(buttonConfirmar)
+        			.addGap(26))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -279,6 +296,5 @@ public class cad_ameaca extends javax.swing.JDialog {
     private javax.swing.JTextField aPathCorrecao;
     private javax.swing.JTextField aSolucao;
     private javax.swing.JTextField aConsequencia;
-    // End of variables declaration//GEN-END:variables
 }
 

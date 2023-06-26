@@ -5,6 +5,7 @@
 package trabalho_prj;
 
 import trabalho_prj.Tabela;
+import trabalho_prj.Sobre;
 import trabalho_prj.Ameaca;
 import trabalho_prj.entrar;
 import javax.swing.JPanel;
@@ -26,10 +27,20 @@ import javax.swing.JTextArea;
 import java.awt.TextField;
 import java.awt.TextArea;
 import javax.swing.JLayeredPane;
+import javax.swing.JButton;
+import javax.swing.UIManager;
+import javax.swing.JMenuBar;
+import java.awt.SystemColor;
+import javax.swing.JMenu;
+import javax.swing.JToolBar;
+import javax.swing.JTextField;
+import java.awt.Label;
+import javax.swing.JEditorPane;
+import javax.swing.JTextPane;
 
 /**
  *
- * @author ASTECH
+ * @author Vinicius
  */
 public class entrar extends javax.swing.JDialog {
 
@@ -38,7 +49,38 @@ public class entrar extends javax.swing.JDialog {
      */
     public entrar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        getContentPane().setBackground(new Color(0, 102, 153));
+        setForeground(UIManager.getColor("CheckBox.interiorBackground"));
+        getContentPane().setBackground(UIManager.getColor("CheckBox.background"));
+        
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.setForeground(UIManager.getColor("CheckBox.foreground"));
+        menuBar.setBackground(UIManager.getColor("CheckBox.focus"));
+        setJMenuBar(menuBar);
+        
+        JButton btnSobre = new JButton("sobre");
+        btnSobre.setForeground(Color.WHITE);
+        btnSobre.setBackground(Color.DARK_GRAY);
+        menuBar.add(btnSobre);
+        jButton1 = new javax.swing.JButton();
+        menuBar.add(jButton1);
+        
+                jButton1.setBackground(Color.DARK_GRAY);
+                jButton1.setFont(new Font("Tahoma", Font.PLAIN, 11)); // NOI18N
+                jButton1.setForeground(Color.WHITE);
+                jButton1.setText("cadastrar");
+                jButton1.setBorder(null);
+                jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                jButton1.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton1ActionPerformed(evt);
+                    }
+                });
+        
+        btnSobre.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		Sobre.exibirTelaSobre();
+        	}
+        });
         initComponents();
     }
 
@@ -52,46 +94,44 @@ public class entrar extends javax.swing.JDialog {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
-        jButton1 = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
-        setBackground(new java.awt.Color(255, 255, 255));
-
-        jButton1.setBackground(new Color(255, 255, 255));
-        jButton1.setFont(new Font("Leelawadee UI", Font.BOLD, 16)); // NOI18N
-        jButton1.setForeground(new Color(0, 102, 153));
-        jButton1.setText("entrar");
-        jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        setBackground(UIManager.getColor("Button.shadow"));
         
         JLayeredPane layeredPane = new JLayeredPane();
+        
+        JLabel lblNewLabel = new JLabel("CADASTRAR AMEAÇAS");
+        lblNewLabel.setFont(new Font("Inter ExtraBold", Font.PLAIN, 16));
+        
+        JTextPane txtpnCadastreONmero = new JTextPane();
+        txtpnCadastreONmero.setText("Cadastre o número CVE (ex: CVE-2023-31145)\r\n\nProduto (ex: Windows 7)\r\n\nVersao (ex: 1.2)\n\r\nTipo (ex: Spam, Worm, Virus, Trrojan, DDOS,  Ramsoware, etc...)\n\r\nCriticidade (1 - Alto, 2 - Médio, 3 - Baixo)\n\r\nData  (data da descoberta)\n\r\nPathCorrecao (arquivo a ser executado para resolver)\r\n\r\nSolucao (texto grande contendo os passos para resolver)\n\r\nConsequencia (PDF com as possiveis consequencias se esta ameaca nao for mitigada)\n");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
         	layout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap(384, Short.MAX_VALUE)
-        			.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap())
-        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-        			.addGap(100)
-        			.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(387, Short.MAX_VALUE))
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(100)
+        					.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(23)
+        					.addComponent(txtpnCadastreONmero, GroupLayout.PREFERRED_SIZE, 358, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(107)
+        					.addComponent(lblNewLabel)))
+        			.addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.TRAILING)
+        	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
-        			.addGap(79)
-        			.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-        			.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap())
+        			.addGap(20)
+        			.addComponent(lblNewLabel)
+        			.addGap(31)
+        			.addComponent(txtpnCadastreONmero, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
         getContentPane().setLayout(layout);
 
