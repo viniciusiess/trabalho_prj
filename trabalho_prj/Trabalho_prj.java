@@ -4,7 +4,7 @@
  */
 package trabalho_prj;
 
-import trabalho_pav_vinicius.entrar;
+import trabalho_prj.entrar;
 
 /**
  *

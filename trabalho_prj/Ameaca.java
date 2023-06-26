@@ -24,6 +24,9 @@ public class Ameaca implements Serializable {
     private String tipo;
     private String criticidade;
     private String data;
+    private String pathCorrecao;
+    private String solucao;
+    private String consequencia;
     ArrayList<String> ameacas = new ArrayList<String>();
     
     public String ameacaNumCve() {
@@ -50,6 +53,18 @@ public class Ameaca implements Serializable {
         return data;
     }
     
+    public String ameacaPathCorrecao() {
+    	return pathCorrecao;
+    }
+    
+    public String ameacaSolucao() {
+    	return solucao;
+    }
+    
+    public String ameacaConsequencia() {
+    	return consequencia;
+    }
+    
     public void atualizarNumCve(String numCve) {
         this.numCve = numCve;
     }
@@ -72,6 +87,18 @@ public class Ameaca implements Serializable {
     
     public void atualizarData(String data) {
         this.data = data;
+    }
+    
+    public void atualizarPathCorrecao(String pathCorrecao) {
+        this.pathCorrecao = pathCorrecao;
+    }
+    
+    public void atualizarSolucao(String solucao) {
+    	this.solucao = solucao;
+    }
+    
+    public void atualizarConsequencia(String consequencia) {
+    	this.consequencia = consequencia;
     }
     
     public void salvar() {

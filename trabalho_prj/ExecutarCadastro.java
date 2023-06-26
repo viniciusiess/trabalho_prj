@@ -6,7 +6,7 @@ package trabalho_prj;
 
 /**
  *
- * @author ASTECH
+ * @author Vinicius
  */
 public enum ExecutarCadastro {
     adicionar,

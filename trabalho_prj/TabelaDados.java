@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-import trabalho_pav_vinicius.Usuario;
+import trabalho_prj.Ameaca;
 
 /**
  *
@@ -21,9 +21,12 @@ public class TabelaDados extends AbstractTableModel {
     private static final int COL_TIPO = 3;
     private static final int COL_CRITICIDADE = 4;
     private static final int COL_DATA = 5;
+    private static final int COL_PATHCORRECAO = 6;
+    private static final int COL_SOLUCAO = 7;
+    private static final int COL_CONSEQUENCIA = 8;
     
        
-    private String[] colunas = new String[]{"NumCVE", "Produto", "Versão", "Tipo", "Criticidade", "Data"};
+    private String[] colunas = new String[]{"NumCVE", "Produto", "Versão", "Tipo", "Criticidade", "Data", "Path Correção", "Solução", "Consequência"};
     private List<Ameaca> ameacas;
     
     public TabelaDados(List<Ameaca>ameacas) {
@@ -62,6 +65,12 @@ public class TabelaDados extends AbstractTableModel {
             	return ameaca.ameacaCriticidade();
             case COL_DATA:
             	return ameaca.ameacaData();
+            case COL_PATHCORRECAO:
+            	return ameaca.ameacaPathCorrecao();
+            case COL_SOLUCAO:
+            	return ameaca.ameacaSolucao();
+            case COL_CONSEQUENCIA:
+            	return ameaca.ameacaConsequencia();
         }
         return "";
     }
@@ -87,6 +96,15 @@ public class TabelaDados extends AbstractTableModel {
             case COL_DATA:
                 ameaca.atualizarData(valor.toString());
                 break;
+            case COL_PATHCORRECAO:
+            	ameaca.atualizarPathCorrecao(valor.toString());
+            	break;
+            case COL_SOLUCAO:
+            	ameaca.atualizarSolucao(valor.toString());
+            	break;
+            case COL_CONSEQUENCIA:
+            	ameaca.atualizarConsequencia(valor.toString());
+            	break;
         }
     }
     

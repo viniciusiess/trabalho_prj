@@ -7,7 +7,7 @@ package trabalho_prj;
 import javax.swing.JOptionPane;
 /**
  *
- * @author ASTECH
+ * @author Vinicius
  */
 public class cad_ameaca extends javax.swing.JDialog {
     private ExecutarCadastro executarCadastro;
@@ -24,11 +24,13 @@ public class cad_ameaca extends javax.swing.JDialog {
         initComponents();
         if(executarCadastro == executarCadastro.atualizar || executarCadastro == ExecutarCadastro.consultar) {
             aNumCve.setText(ameaca.ameacaNumCve());
-            aProduto.setText(ameaca.ameacaProduto());
             aVersao.setText(ameaca.ameacaVersao());
             aTipo.setText(ameaca.ameacaTipo());
             aCriticidade.setText(ameaca.ameacaCriticidade());
             aData.setText(ameaca.ameacaData());
+            aPathCorrecao.setText(ameaca.ameacaPathCorrecao());
+            aSolucao.setText(ameaca.ameacaSolucao());
+            aConsequencia.setText(ameaca.ameacaConsequencia());
         }
     }
     
@@ -63,6 +65,9 @@ public class cad_ameaca extends javax.swing.JDialog {
         aTipo = new javax.swing.JTextField();
         aCriticidade = new javax.swing.JTextField();
         aData = new javax.swing.JTextField();
+        aPathCorrecao = new javax.swing.JTextField();
+        aSolucao = new javax.swing.JTextField();
+        aConsequencia = new javax.swing.JTextField();
         buttonConfirmar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -70,6 +75,9 @@ public class cad_ameaca extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,6 +105,12 @@ public class cad_ameaca extends javax.swing.JDialog {
         jLabel5.setText("Criticidade:");
 
         jLabel6.setText("Data:");
+        
+        jLabel7.setText("Path Correção");
+        
+        jLabel8.setText("Solução");
+        
+        jLabel9.setText("Consequência");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,7 +128,10 @@ public class cad_ameaca extends javax.swing.JDialog {
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel5)
-                                .addComponent(jLabel6))
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel9))
                             .addGap(26, 26, 26)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(aNumCve, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,7 +139,10 @@ public class cad_ameaca extends javax.swing.JDialog {
                                 .addComponent(aVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(aTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(aCriticidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(aData, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(aData, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(aPathCorrecao, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(aSolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(aConsequencia, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addContainerGap(45, Short.MAX_VALUE))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -157,6 +177,18 @@ public class cad_ameaca extends javax.swing.JDialog {
                      .addGap(18, 18, 18)
                      .addComponent(aData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                      .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                          .addComponent(aPathCorrecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addComponent(jLabel7))
+                     .addGap(18, 18, 18)
+                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                          .addComponent(aSolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addComponent(jLabel8))
+                     .addGap(18, 18, 18)
+                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                          .addComponent(aConsequencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addComponent(jLabel9))
+                     .addGap(18, 18, 18)
                      
                     .addComponent(buttonConfirmar)
                     .addGap(26, 26, 26))
@@ -173,6 +205,9 @@ public class cad_ameaca extends javax.swing.JDialog {
             ameaca.atualizarTipo(aTipo.getText());
             ameaca.atualizarCriticidade(aCriticidade.getText());
             ameaca.atualizarData(aData.getText());
+            ameaca.atualizarPathCorrecao(aPathCorrecao.getText());
+            ameaca.atualizarSolucao(aSolucao.getText());
+            ameaca.atualizarConsequencia(aConsequencia.getText());
             ameaca.salvar();
             confirmado = true;
         }
@@ -232,12 +267,18 @@ public class cad_ameaca extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField aNumCve;
     private javax.swing.JTextField aProduto;
     private javax.swing.JTextField aVersao;
     private javax.swing.JTextField aTipo;
     private javax.swing.JTextField aCriticidade;
     private javax.swing.JTextField aData;
+    private javax.swing.JTextField aPathCorrecao;
+    private javax.swing.JTextField aSolucao;
+    private javax.swing.JTextField aConsequencia;
     // End of variables declaration//GEN-END:variables
 }
 

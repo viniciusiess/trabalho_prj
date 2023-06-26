@@ -17,6 +17,15 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import java.awt.Toolkit;
+import javax.swing.JSlider;
+import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
+import javax.swing.JInternalFrame;
+import javax.swing.JTextArea;
+import java.awt.TextField;
+import java.awt.TextArea;
+import javax.swing.JLayeredPane;
 
 /**
  *
@@ -29,6 +38,7 @@ public class entrar extends javax.swing.JDialog {
      */
     public entrar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        getContentPane().setBackground(new Color(0, 102, 153));
         initComponents();
     }
 
@@ -43,15 +53,14 @@ public class entrar extends javax.swing.JDialog {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
 
         jMenuItem1.setText("jMenuItem1");
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setBackground(Color.DARK_GRAY);
-        jButton1.setFont(new Font("Leelawadee UI", Font.PLAIN, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setBackground(new Color(255, 255, 255));
+        jButton1.setFont(new Font("Leelawadee UI", Font.BOLD, 16)); // NOI18N
+        jButton1.setForeground(new Color(0, 102, 153));
         jButton1.setText("entrar");
         jButton1.setBorder(null);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -60,65 +69,28 @@ public class entrar extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jLabel4 = new javax.swing.JLabel();
         
-                jLabel4.setFont(new Font("Leelawadee UI", Font.BOLD, 18)); // NOI18N
-                jLabel4.setText("Cadastro de Ameaças");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1Layout.setHorizontalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGap(137)
-        			.addComponent(jLabel4)
-        			.addContainerGap(149, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        			.addComponent(jLabel4)
-        			.addContainerGap())
-        );
-        jPanel1.setLayout(jPanel1Layout);
-        jLabel1 = new javax.swing.JLabel();
-        
-                jLabel1.setForeground(new java.awt.Color(100, 100, 100));
-                jLabel1.setText("Professor: Mozar Silva");
-        jLabel3 = new javax.swing.JLabel();
-        
-                jLabel3.setForeground(new java.awt.Color(100, 100, 100));
-                jLabel3.setText("Alunos: Lucas | Vinicius Siess");
+        JLayeredPane layeredPane = new JLayeredPane();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
         	layout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        				.addComponent(jPanel1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 468, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(jLabel1)
-        						.addComponent(jLabel3))
-        					.addPreferredGap(ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
-        					.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)))
-        			.addContainerGap(10, Short.MAX_VALUE))
+        			.addContainerGap(384, Short.MAX_VALUE)
+        			.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
+        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        			.addGap(100)
+        			.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(387, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(layout.createSequentialGroup()
-        					.addPreferredGap(ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
-        					.addComponent(jLabel1)
-        					.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-        					.addComponent(jLabel3))
-        				.addGroup(layout.createSequentialGroup()
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(79)
+        			.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+        			.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap())
         );
         getContentPane().setLayout(layout);
@@ -171,6 +143,8 @@ public class entrar extends javax.swing.JDialog {
                         System.exit(0);
                     }
                 });
+                dialog.pack();
+                dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
         });
@@ -178,9 +152,5 @@ public class entrar extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
 }
