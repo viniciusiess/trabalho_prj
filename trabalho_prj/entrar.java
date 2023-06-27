@@ -37,6 +37,7 @@ import javax.swing.JTextField;
 import java.awt.Label;
 import javax.swing.JEditorPane;
 import javax.swing.JTextPane;
+import java.awt.Cursor;
 
 /**
  *
@@ -56,32 +57,35 @@ public class entrar extends javax.swing.JDialog {
         menuBar.setForeground(UIManager.getColor("CheckBox.foreground"));
         menuBar.setBackground(UIManager.getColor("CheckBox.focus"));
         setJMenuBar(menuBar);
-        
-        JButton btnSobre = new JButton("sobre");
-        btnSobre.setForeground(Color.WHITE);
-        btnSobre.setBackground(Color.DARK_GRAY);
-        menuBar.add(btnSobre);
         jButton1 = new javax.swing.JButton();
         menuBar.add(jButton1);
         
                 jButton1.setBackground(Color.DARK_GRAY);
-                jButton1.setFont(new Font("Tahoma", Font.PLAIN, 11)); // NOI18N
+                jButton1.setFont(new Font("Inter", Font.PLAIN, 11)); // NOI18N
                 jButton1.setForeground(Color.WHITE);
                 jButton1.setText("cadastrar");
-                jButton1.setBorder(null);
-                jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                jButton1.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                
+                JButton btnSobre = new JButton("sobre");
+                btnSobre.setFont(new Font("Inter", Font.PLAIN, 11));
+                btnSobre.setForeground(Color.WHITE);
+                btnSobre.setBackground(Color.DARK_GRAY);
+                menuBar.add(btnSobre);
+                
+                btnSobre.addActionListener(new java.awt.event.ActionListener() {
+                	public void actionPerformed(java.awt.event.ActionEvent evt) {
+                		Sobre.exibirTelaSobre();
+                	}
+                });
                 jButton1.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         jButton1ActionPerformed(evt);
                     }
                 });
-        
-        btnSobre.addActionListener(new java.awt.event.ActionListener() {
-        	public void actionPerformed(java.awt.event.ActionEvent evt) {
-        		Sobre.exibirTelaSobre();
-        	}
-        });
         initComponents();
+        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(300, 300));
+        pack();
     }
 
     /**
@@ -103,9 +107,6 @@ public class entrar extends javax.swing.JDialog {
         
         JLabel lblNewLabel = new JLabel("CADASTRAR AMEAÇAS");
         lblNewLabel.setFont(new Font("Inter ExtraBold", Font.PLAIN, 16));
-        
-        JTextPane txtpnCadastreONmero = new JTextPane();
-        txtpnCadastreONmero.setText("Cadastre o número CVE (ex: CVE-2023-31145)\r\n\nProduto (ex: Windows 7)\r\n\nVersao (ex: 1.2)\n\r\nTipo (ex: Spam, Worm, Virus, Trrojan, DDOS,  Ramsoware, etc...)\n\r\nCriticidade (1 - Alto, 2 - Médio, 3 - Baixo)\n\r\nData  (data da descoberta)\n\r\nPathCorrecao (arquivo a ser executado para resolver)\r\n\r\nSolucao (texto grande contendo os passos para resolver)\n\r\nConsequencia (PDF com as possiveis consequencias se esta ameaca nao for mitigada)\n");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -116,25 +117,19 @@ public class entrar extends javax.swing.JDialog {
         					.addGap(100)
         					.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         				.addGroup(layout.createSequentialGroup()
-        					.addGap(23)
-        					.addComponent(txtpnCadastreONmero, GroupLayout.PREFERRED_SIZE, 358, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(107)
+        					.addGap(42)
         					.addComponent(lblNewLabel)))
-        			.addContainerGap(34, Short.MAX_VALUE))
+        			.addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
-        			.addGap(20)
+        			.addGap(66)
         			.addComponent(lblNewLabel)
-        			.addGap(31)
-        			.addComponent(txtpnCadastreONmero, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGap(263)
         			.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
         getContentPane().setLayout(layout);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
