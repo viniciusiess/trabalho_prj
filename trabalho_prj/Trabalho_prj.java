@@ -4,7 +4,7 @@
  */
 package trabalho_prj;
 
-import trabalho_prj.entrar;
+import view.entrar;
 
 /**
  *
