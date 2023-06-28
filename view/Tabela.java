@@ -10,29 +10,35 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 
 import entities.Ameaca;
+import services.AmeacaService;
+import utils.ButtonRenderTable;
 
 import java.awt.Component;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.io.File;
 /**
  *
  * @author Vinicius
  */
 public class Tabela extends javax.swing.JDialog {
     private TabelaDados tabelaDadosAmeaca;
+    private AmeacaService ameacaService  = new AmeacaService();
     /**
      * Creates new form Tabela
      */
     public Tabela(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        tabelaDadosAmeaca = new TabelaDados(new ArrayList<Ameaca>());
+        tabelaDadosAmeaca = new TabelaDados(ameacaService.listarAmeacas());
         tabelaAmeaca.setModel(tabelaDadosAmeaca);
     }
 
@@ -51,6 +57,7 @@ public class Tabela extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,7 +72,11 @@ public class Tabela extends javax.swing.JDialog {
 
             }
         ));
+        
+        
+        
         jScrollPane1.setViewportView(tabelaAmeaca);
+        //tabelaAmeaca.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderTable());
 
         jButton1.setText("Adicionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,10 +99,29 @@ public class Tabela extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setText("Selecionar");
+        jButton4.setText("Importar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+                JFileChooser fileChooser = new JFileChooser();
+    	        int returnValue = fileChooser.showOpenDialog(null);
+    	        if (returnValue == JFileChooser.APPROVE_OPTION) {
+    				File selectedFile = fileChooser.getSelectedFile();
+    				ameacaService.lerArquivo(selectedFile);
+    				JOptionPane.showMessageDialog(null,
+      			          "Arquivo importado com sucesso!", "Message",
+      			          JOptionPane.INFORMATION_MESSAGE);	
+    	        }
+            }
+        });
+        
+        jButton5.setText("Exportar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ameacaService.exportar();
+    			JOptionPane.showMessageDialog(null,
+    			          "Arquivo exportado com sucesso!", "Message",
+    			          JOptionPane.INFORMATION_MESSAGE);	
             }
         });
         
@@ -140,10 +170,12 @@ public class Tabela extends javax.swing.JDialog {
         						.addComponent(jButton1)
         						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         						.addComponent(jButton2)
-        						.addGap(84)
+        						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         						.addComponent(jButton3)
-        						.addGap(87)
-        						.addComponent(jButton4))
+        						.addGap(160)
+        						.addComponent(jButton4)
+        						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    						.addComponent(jButton5))
         					.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 592, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap(40, Short.MAX_VALUE))
         );
@@ -157,7 +189,8 @@ public class Tabela extends javax.swing.JDialog {
         				.addComponent(jButton1)
         				.addComponent(jButton2)
         				.addComponent(jButton3)
-        				.addComponent(jButton4))
+        				.addComponent(jButton4)
+        				.addComponent(jButton5))
         			.addGap(18)
         			.addComponent(lblNewLabel)
         			.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -254,6 +287,7 @@ public class Tabela extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaAmeaca;
     private JTextField textField;

@@ -109,7 +109,7 @@ public class cad_ameaca extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        Ameaca teste = new Ameaca();
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -122,7 +122,7 @@ public class cad_ameaca extends javax.swing.JDialog {
         buttonConfirmar.setText("confirmar");
         buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonConfirmarActionPerformed(teste);
+                buttonConfirmarActionPerformed(ameaca);
             }
         });
         
@@ -132,7 +132,7 @@ public class cad_ameaca extends javax.swing.JDialog {
 	        JFileChooser fileChooser = new JFileChooser();
 	        int returnValue = fileChooser.showOpenDialog(null);
 	        if (returnValue == JFileChooser.APPROVE_OPTION) 
-	        	teste.setConsequencia(fileChooser.getSelectedFile());
+	        	ameaca.setConsequencia(fileChooser.getSelectedFile());
 	      }
 	    });
 		    
@@ -142,7 +142,7 @@ public class cad_ameaca extends javax.swing.JDialog {
   	        JFileChooser fileChooser = new JFileChooser();
   	        int returnValue = fileChooser.showOpenDialog(null);
   	        if (returnValue == JFileChooser.APPROVE_OPTION) 
-  	        	teste.setSolucao(fileChooser.getSelectedFile());
+  	        	ameaca.setSolucao(fileChooser.getSelectedFile());
   	      }
   	    });
         
@@ -152,7 +152,7 @@ public class cad_ameaca extends javax.swing.JDialog {
   	        JFileChooser fileChooser = new JFileChooser();
   	        int returnValue = fileChooser.showOpenDialog(null);
   	        if (returnValue == JFileChooser.APPROVE_OPTION) 
-  	        	teste.setPathCorrecao(fileChooser.getSelectedFile());
+  	        	ameaca.setPathCorrecao(fileChooser.getSelectedFile());
   	      }
   	    });
         

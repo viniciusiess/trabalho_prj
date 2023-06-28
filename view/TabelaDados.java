@@ -4,13 +4,22 @@
  */
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import entities.Ameaca;
+import services.AmeacaService;
 
 
 /**
@@ -27,10 +36,11 @@ public class TabelaDados extends AbstractTableModel {
     private static final int COL_PATHCORRECAO = 6;
     private static final int COL_SOLUCAO = 7;
     private static final int COL_CONSEQUENCIA = 8;
-    
+    private static final int COL_CHECK = 9;
        
-    private String[] colunas = new String[]{"NumCVE", "Produto", "Versão", "Tipo", "Criticidade", "Data", "Path Correção", "Solução", "Consequência"};
+    private String[] colunas = new String[]{"NumCVE", "Produto", "Versão", "Tipo", "Criticidade", "Data", "Path Correção", "Solução", "Consequência", "Selecionar"};
     private List<Ameaca> ameacas;
+    private AmeacaService ameacaService = new AmeacaService();
     
     public TabelaDados(List<Ameaca> arrayList) {
         this.ameacas = new ArrayList<Ameaca>(arrayList);
@@ -53,8 +63,28 @@ public class TabelaDados extends AbstractTableModel {
         return false;
     }
     
+    private JButton teste = new JButton("VAi");
+    
     public Object getValueAt(int linha, int coluna) {
         Ameaca ameaca = ameacas.get(linha);
+        
+        teste.addActionListener(new ActionListener() {
+  	      public void actionPerformed(ActionEvent ae) {
+  	        try {
+  				ameacaService.download(ameaca.getId(), "path_correcao", "pdf");
+  			} catch (IOException e) {
+  				// TODO Auto-generated catch block
+  				e.printStackTrace();
+  			} catch (SQLException e) {
+  				// TODO Auto-generated catch block
+  				e.printStackTrace();
+  			}
+  	      JOptionPane.showMessageDialog(null,
+		          "Arquivo baixado com sucesso!", "Message",
+		          JOptionPane.INFORMATION_MESSAGE);	
+  	      }
+  	    });
+        
         switch(coluna) {
             case COL_NUMCVE:
                 return ameaca.getCve();
@@ -69,11 +99,12 @@ public class TabelaDados extends AbstractTableModel {
             case COL_DATA:
             	return ameaca.getData();
             case COL_PATHCORRECAO:
-            	return ameaca.getPathCorrecao();
+            	return teste;
             case COL_SOLUCAO:
-            	return ameaca.getSolucao();
+            	return ameaca.getSolucao().getName();
             case COL_CONSEQUENCIA:
-            	return ameaca.getConsequencia();
+            	return ameaca.getConsequencia().getName();
+            
         }
         return "";
     }

@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import entities.Ameaca;
+import utils.BlobToFileConverter;
 
 public class AmeacaRepository extends RepositoryBase {
 	public void criarAmeaca(Ameaca ameaca) {
@@ -112,13 +113,23 @@ public class AmeacaRepository extends RepositoryBase {
 	            ameaca.setCriticidade(resultado.getString("criticidade"));
 	            ameaca.setCve(resultado.getString("cve"));
 	            ameaca.setData(resultado.getDate("data"));
-	            /*ameaca.setPathCorrecao((File) resultado.getBlob("path_correcao"));
-	            ameaca.setSolucao((File) resultado.getBlob("solucao"));
-	            ameaca.setConsequencia(resultado.getBlob("consequencia"));*/
 	            
-	            System.out.println("CVE: " + resultado.getString("cve"));
-	            System.out.println("PRODUTO: " + resultado.getString("produto"));
-	            System.out.println("VERSAO: " + resultado.getString("versao"));
+	            
+	            byte[] blobBytesPathCorrecao = resultado.getBytes("path_correcao");
+	            Blob blobPathCorrecao = new javax.sql.rowset.serial.SerialBlob(blobBytesPathCorrecao);
+	            File pathCorrecao = BlobToFileConverter.convertBlobToFile(blobPathCorrecao);
+	            ameaca.setPathCorrecao(pathCorrecao);
+	            
+	            byte[] blobBytesSolucao = resultado.getBytes("solucao");
+	            Blob blobSolucao = new javax.sql.rowset.serial.SerialBlob(blobBytesSolucao);
+	            File solucao = BlobToFileConverter.convertBlobToFile(blobSolucao);
+	            ameaca.setSolucao(solucao);
+	            
+	            byte[] blobBytesConsequencia = resultado.getBytes("consequencia");
+	            Blob blobConsequencia = new javax.sql.rowset.serial.SerialBlob(blobBytesConsequencia);
+	            File consequencia = BlobToFileConverter.convertBlobToFile(blobConsequencia);
+	            ameaca.setConsequencia(consequencia);
+	            
 	            ameacas.add(ameaca);
 			}
 			
