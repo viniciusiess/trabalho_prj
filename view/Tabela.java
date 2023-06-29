@@ -24,7 +24,11 @@ import java.awt.Component;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 /**
  *
  * @author Vinicius
@@ -40,6 +44,47 @@ public class Tabela extends javax.swing.JDialog {
         initComponents();
         tabelaDadosAmeaca = new TabelaDados(ameacaService.listarAmeacas());
         tabelaAmeaca.setModel(tabelaDadosAmeaca);
+        
+        JButton button = new JButton("TEste");
+        button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ameacaService.exportar();
+    			JOptionPane.showMessageDialog(null,
+    			          "Arquivo exportado com sucesso!", "Message",
+    			          JOptionPane.INFORMATION_MESSAGE);	
+            }
+        });
+        tabelaAmeaca.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderTable());
+        tabelaAmeaca.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderTable());
+        tabelaAmeaca.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderTable());
+        
+        tabelaAmeaca.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int row = tabelaAmeaca.rowAtPoint(e.getPoint());
+                int column = tabelaAmeaca.columnAtPoint(e.getPoint());
+                int indice = tabelaAmeaca.getSelectedRow();
+                if(indice >= 0) {
+	                if (column == 6 || column == 7 || column == 8) {
+	                	Ameaca ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
+	                	
+	                	String coluna = column == 6 ? "path_correcao" : column == 7 ? "solucao" : "consequencia";
+	                	
+	                	try {
+							ameacaService.download(ameaca, coluna, column == 6 ? "zip" : "pdf");
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+	                	JOptionPane.showMessageDialog(null,
+	      			          "Arquivo " + ameaca.getCve() + "-" + coluna +  " baixado com sucesso!", "Message",
+	      			          JOptionPane.INFORMATION_MESSAGE);	
+	                }
+                }
+            }
+        });
     }
 
     /**
@@ -76,7 +121,6 @@ public class Tabela extends javax.swing.JDialog {
         
         
         jScrollPane1.setViewportView(tabelaAmeaca);
-        //tabelaAmeaca.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderTable());
 
         jButton1.setText("Adicionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +140,7 @@ public class Tabela extends javax.swing.JDialog {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+                
             }
         });
 
@@ -107,7 +152,13 @@ public class Tabela extends javax.swing.JDialog {
     	        int returnValue = fileChooser.showOpenDialog(null);
     	        if (returnValue == JFileChooser.APPROVE_OPTION) {
     				File selectedFile = fileChooser.getSelectedFile();
-    				ameacaService.lerArquivo(selectedFile);
+    				Iterable<Ameaca> ameacas =  ameacaService.lerArquivo(selectedFile);
+    				//Iterable<Ameaca> ameacas =  ameacaService.importarBin(selectedFile);
+    				
+    				for(Ameaca ameaca : ameacas) {
+    					tabelaDadosAmeaca.adicionarAmeaca(ameaca);
+    				}
+    				
     				JOptionPane.showMessageDialog(null,
       			          "Arquivo importado com sucesso!", "Message",
       			          JOptionPane.INFORMATION_MESSAGE);	
@@ -205,7 +256,9 @@ public class Tabela extends javax.swing.JDialog {
         );
         layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jButton1, jButton2, jButton3, jButton4});
         getContentPane().setLayout(layout);
-
+        
+        //tabelaAmeaca.getCo;
+        
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,7 +273,9 @@ public class Tabela extends javax.swing.JDialog {
         int indice = tabelaAmeaca.getSelectedRow();
         if(indice >= 0) {
         	Ameaca ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
+        	System.out.println("AMEACA ID: " + ameaca.getId());
             if(cad_ameaca.executar(null, ExecutarCadastro.atualizar, ameaca)) {
+            	ameacaService.atualizar(ameaca);
                 tabelaDadosAmeaca.atualizarAmeaca(indice, ameaca);
             }
         }
@@ -228,8 +283,12 @@ public class Tabela extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int indice = tabelaAmeaca.getSelectedRow();
+        
         if(indice >= 0) {
-            tabelaDadosAmeaca.deletarAmeaca(indice);
+        	Ameaca ameaca = tabelaDadosAmeaca.pegaAmeaca(indice);
+            ameacaService.remover(ameaca.getId());
+        	tabelaDadosAmeaca.deletarAmeaca(indice);
+            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

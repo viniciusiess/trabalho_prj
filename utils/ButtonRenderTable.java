@@ -7,19 +7,20 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
     
 public class ButtonRenderTable extends AbstractCellEditor implements TableCellRenderer {
-    private JButton button;
-    
+	private JButton button;
+
     public ButtonRenderTable() {
-        button = new JButton();
+        button = new JButton("Baixar");
     }
-    
+
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         return button;
     }
-    
-    @Override
-    public Object getCellEditorValue() {
-        return null;
-    }
+
+	@Override
+	public Object getCellEditorValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

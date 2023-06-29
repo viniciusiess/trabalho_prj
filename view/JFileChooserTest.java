@@ -60,7 +60,7 @@ public class JFileChooserTest {
 	    
 	    
 	    JButton button2 = new JButton("Download");
-	    button2.addActionListener(new ActionListener() {
+	    /*button2.addActionListener(new ActionListener() {
 	      public void actionPerformed(ActionEvent ae) {
 	        try {
 				ameacaService.download(1, "path_correcao", "pdf");
@@ -72,7 +72,7 @@ public class JFileChooserTest {
 				e.printStackTrace();
 			}
 	      }
-	    });
+	    });*/
 	    
 	    JButton button3 = new JButton("Importar");
 	    button3.addActionListener(new ActionListener() {

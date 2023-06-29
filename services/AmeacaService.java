@@ -17,9 +17,21 @@ public class AmeacaService {
 		  System.out.println("Ameaça salva com sucesso!");
 	  }
 	  
-	  public void download (int idRegistro, String coluna, String tipoArquivo) throws IOException, SQLException {
+	  public void atualizar(Ameaca ameaca) {
+		  System.out.println("Atualizando....");
+		  ameacaRepository.atualizarAmeacas(ameaca);
+		  System.out.println("Ameaça atualizada com sucesso!");
+	  }
+	  
+	  public void remover(int ameacaId) {
+		  System.out.println("Removendo....");
+		  ameacaRepository.deletarAmeaca(ameacaId);
+		  System.out.println("Ameaça removida com sucesso!");
+	  }
+	  
+	  public void download (Ameaca ameaca, String coluna, String tipoArquivo) throws IOException, SQLException {
 		  System.out.println("Salvando....");
-		  ameacaRepository.download(idRegistro, coluna, tipoArquivo);
+		  ameacaRepository.download(ameaca, coluna, tipoArquivo);
 		  System.out.println("Ameaça salva com sucesso!");
 	  }
 	  
@@ -33,8 +45,18 @@ public class AmeacaService {
 		  return ameacaRepository.ler(pathName);
 	  }
 	  
+	  public Iterable<Ameaca> importarBin (File pathName){
+		  System.out.println("pathName: " + pathName);
+		  return ameacaRepository.importarBin(pathName);
+	  }
+	  
 	  public void exportar(){
 		  System.out.println("Exportando...");
 		  ameacaRepository.exportar();
+	  }
+	  
+	  public void exportarBin(){
+		  System.out.println("Exportando...");
+		  ameacaRepository.exportarBinario();
 	  }
 }

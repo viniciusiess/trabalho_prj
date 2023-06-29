@@ -1,10 +1,11 @@
 package entities;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Ameaca {
+public class Ameaca implements Serializable{
 	private int id;
 	private int idProduto;
 	private int idVersao;
