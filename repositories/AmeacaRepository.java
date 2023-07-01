@@ -11,6 +11,9 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
@@ -169,7 +172,7 @@ public class AmeacaRepository extends RepositoryBase {
 	            ameaca.setCriticidade(resultado.getString("criticidade"));
 	            ameaca.setCve(resultado.getString("cve"));
 	            ameaca.setData(resultado.getDate("data"));
-	            
+	          
 	            
 	            byte[] blobBytesPathCorrecao = resultado.getBytes("path_correcao");
 	            Blob blobPathCorrecao = new javax.sql.rowset.serial.SerialBlob(blobBytesPathCorrecao);
@@ -334,6 +337,8 @@ public class AmeacaRepository extends RepositoryBase {
 	
 	public void exportar() {
 		ArrayList<Ameaca> ameacas = this.listarAmeacas();
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		String diretorio = System.getProperty("user.dir");
 		
 		try{
 	          FileOutputStream fs = new FileOutputStream("arquivoExportado.txt");
@@ -341,17 +346,26 @@ public class AmeacaRepository extends RepositoryBase {
 	          BufferedWriter
 	          bw = new BufferedWriter(sr);  
 	          for(Ameaca ameaca : ameacas){
+	        	  File newFile = new File(diretorio+"/tmp");
+	        	  Path consequencia = Files.move(ameaca.getConsequencia().toPath(), newFile.toPath().resolve("consequencia-"+ameaca.getCve()+"-"+ameaca.getData()+".pdf"), StandardCopyOption.REPLACE_EXISTING);
+	        	  Path solucao = Files.move(ameaca.getSolucao().toPath(), newFile.toPath().resolve("solucao-"+ameaca.getCve()+"-"+ameaca.getData()+".pdf"), StandardCopyOption.REPLACE_EXISTING);
+	        	  Path pathCorrecao = Files.move(ameaca.getPathCorrecao().toPath(), newFile.toPath().resolve("path_correcao-"+ameaca.getCve()+"-"+ameaca.getData()+".zip"), StandardCopyOption.REPLACE_EXISTING);
+	        	  
 	        	  bw.write(ameaca.getCve()+",");
 	        	  bw.write(ameaca.getProduto()+",");
 	        	  bw.write(ameaca.getVersao()+",");
 	        	  bw.write(ameaca.getTipo()+",");
 	        	  bw.write(ameaca.getCriticidade()+",");
-	        	  bw.write(ameaca.getData()+",");
-	        	  bw.write(ameaca.getPathCorrecao().getPath()+",");
-	        	  bw.write(ameaca.getSolucao().getPath()+",");
-	        	  bw.write(ameaca.getConsequencia().getPath());
+	        	  bw.write(formato.format(ameaca.getData())+",");
+	        	  bw.write(pathCorrecao+",");
+	        	  bw.write(solucao+",");
+	        	  bw.write(consequencia+"");
 	        	  bw.newLine();
+	        	  
+	        	  
+	        	  
 	          }
+	          
 	          bw.close();
 	          sr.close();
 	          fs.close();
@@ -364,6 +378,7 @@ public class AmeacaRepository extends RepositoryBase {
 	
 	public void exportarBinario() {		
 		ArrayList<Ameaca> ameacas = this.listarAmeacas();
+		String diretorio = System.getProperty("user.dir");
 		
 		try{
 	          FileOutputStream fileOutput = new FileOutputStream("arquivoExportado.bin");
@@ -372,14 +387,16 @@ public class AmeacaRepository extends RepositoryBase {
 
 	            System.out.println(ameacas.get(1).getPathCorrecao());
 	            for(Ameaca ameaca : ameacas ) {
-	            	File file = new File(ameaca.getPathCorrecao().getPath());
-	            	ameaca.setPathCorrecao(file);
+	            	File newFile = new File(diretorio+"/tmp");
+		        	  Path consequencia = Files.move(ameaca.getConsequencia().toPath(), newFile.toPath().resolve("consequencia-"+ameaca.getCve()+"-"+ameaca.getData()+".pdf"), StandardCopyOption.REPLACE_EXISTING);
+		        	  Path solucao = Files.move(ameaca.getSolucao().toPath(), newFile.toPath().resolve("solucao-"+ameaca.getCve()+"-"+ameaca.getData()+".pdf"), StandardCopyOption.REPLACE_EXISTING);
+		        	  Path pathCorrecao = Files.move(ameaca.getPathCorrecao().toPath(), newFile.toPath().resolve("path_correcao-"+ameaca.getCve()+"-"+ameaca.getData()+".zip"), StandardCopyOption.REPLACE_EXISTING);
 	            	
-	            	File file2 = new File(ameaca.getSolucao().getPath());
-	            	ameaca.setSolucao(file2);
+	            	ameaca.setPathCorrecao(pathCorrecao.toFile());
 	            	
-	            	File file3 = new File(ameaca.getConsequencia().getPath());
-	            	ameaca.setConsequencia(file3);
+	            	ameaca.setSolucao(solucao.toFile());
+	            	
+	            	ameaca.setConsequencia(consequencia.toFile());
 	            }
 	            // Escrever o objeto no arquivo binário
 	            objectOutputStream.writeObject(ameacas);
@@ -396,13 +413,36 @@ public class AmeacaRepository extends RepositoryBase {
 	
 	public Iterable<Ameaca> ler(File pathName){
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-			
+		
+		String extensao = pathName.getPath().substring(pathName.getPath().lastIndexOf(".") + 1);
+		extensao.intern();
+		
+		if(extensao == "bin") {
+			try {
+	            FileInputStream fileInputStream = new FileInputStream(pathName);
+
+	            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+	            
+	            ArrayList<Ameaca> lista = (ArrayList<Ameaca>) objectInputStream.readObject();
+	
+	            objectInputStream.close();
+	
+	            for (Ameaca item : lista) {
+	                  this.criarAmeaca(item);
+	            }
+	            
+	            return lista;
+	
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+		}else {	
 		 try{
-	         File f = pathName;
 	         ArrayList<Ameaca> lista = new ArrayList<Ameaca>();
-	         if (f.exists())
+	         if (pathName.exists())
 	         {
-	            FileInputStream fs = new FileInputStream(f);
+	            FileInputStream fs = new FileInputStream(pathName);
 	            InputStreamReader sr = new InputStreamReader(fs);
 	            BufferedReader br = new BufferedReader(sr);  
 	            String linha;
@@ -417,8 +457,11 @@ public class AmeacaRepository extends RepositoryBase {
 	                  ameaca.setTipo(campos[3]);
 	                  ameaca.setCriticidade(campos[4]);
 
-	                  java.util.Date data = formato.parse(campos[5]);
-	                  ameaca.setData(new java.sql.Date(data.getTime()));
+	                  SimpleDateFormat lerYT = new SimpleDateFormat("dd/MM/yyyy");
+	                  
+	                  java.util.Date data = formato.parse(campos[5]) ;
+	                  System.out.println(data);
+	                  ameaca.setData(data);
 	                  ameaca.setPathCorrecao(new File(campos[6]));
 	                  ameaca.setSolucao(new File(campos[7]));
 	                  ameaca.setConsequencia(new File(campos[8]));
@@ -438,6 +481,7 @@ public class AmeacaRepository extends RepositoryBase {
 	          System.exit(0);
 	          return null;
 	       }
+		}
 	}
 	
 	public Iterable<Ameaca> importarBin (File file){

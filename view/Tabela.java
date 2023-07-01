@@ -102,7 +102,8 @@ public class Tabela extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        exportarTxt = new javax.swing.JButton();
+        exportarBin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -166,8 +167,18 @@ public class Tabela extends javax.swing.JDialog {
             }
         });
         
-        jButton5.setText("Exportar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        exportarBin.setText(".bin");
+        exportarBin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ameacaService.exportarBin();
+    			JOptionPane.showMessageDialog(null,
+    			          "Arquivo exportado com sucesso!", "Message",
+    			          JOptionPane.INFORMATION_MESSAGE);	
+            }
+        });
+        
+        exportarTxt.setText(".txt");
+        exportarTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ameacaService.exportar();
     			JOptionPane.showMessageDialog(null,
@@ -226,7 +237,9 @@ public class Tabela extends javax.swing.JDialog {
         						.addGap(160)
         						.addComponent(jButton4)
         						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	    						.addComponent(jButton5))
+	    						.addComponent(exportarBin)
+	    						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    						.addComponent(exportarTxt))
         					.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 592, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap(40, Short.MAX_VALUE))
         );
@@ -241,7 +254,8 @@ public class Tabela extends javax.swing.JDialog {
         				.addComponent(jButton2)
         				.addComponent(jButton3)
         				.addComponent(jButton4)
-        				.addComponent(jButton5))
+        				.addComponent(exportarBin)
+        				.addComponent(exportarTxt))
         			.addGap(18)
         			.addComponent(lblNewLabel)
         			.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -346,7 +360,8 @@ public class Tabela extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton exportarBin;
+    private javax.swing.JButton exportarTxt;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaAmeaca;
     private JTextField textField;

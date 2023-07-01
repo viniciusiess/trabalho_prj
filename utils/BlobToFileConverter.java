@@ -11,11 +11,10 @@ import java.sql.SQLException;
 public class BlobToFileConverter {
 
     public static File convertBlobToFile(Blob blob) throws SQLException, IOException {
-        // Criar um novo arquivo temporário
         File file = File.createTempFile("tempfile", null);
         file.deleteOnExit();
 
-        // Criar o OutputStream para gravar os bytes do BLOB no arquivo
+
         try (OutputStream os = new FileOutputStream(file)) {
             byte[] buffer = new byte[4096];
             int bytesRead;

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +64,7 @@ public class TabelaDados extends AbstractTableModel {
     }
     
     public Object getValueAt(int linha, int coluna) {
+    	SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Ameaca ameaca = ameacas.get(linha);
         
         switch(coluna) {
@@ -77,7 +79,7 @@ public class TabelaDados extends AbstractTableModel {
             case COL_CRITICIDADE:
             	return ameaca.getCriticidade();
             case COL_DATA:
-            	return ameaca.getData();
+            	return formato.format(ameaca.getData());
             case COL_PATHCORRECAO:
             	return ameaca.getPathCorrecao();
             case COL_SOLUCAO:
