@@ -133,4 +133,7 @@ public class Ameaca implements Serializable{
 	public void setCriticidade(String criticidade) {
 		this.criticidade = criticidade;
 	}
+	
+	
+    
 }

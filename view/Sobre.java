@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
 import java.awt.Panel;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;

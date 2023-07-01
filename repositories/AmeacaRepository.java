@@ -303,17 +303,14 @@ public class AmeacaRepository extends RepositoryBase {
         String diretorio = System.getProperty("user.dir");
         String urlBanco = "jdbc:sqlite:" + diretorio + "/db.db";
         
-        // Abre a conexão com o banco de dados SQLite
         Connection conexao = DriverManager.getConnection(urlBanco);
         
-        // Monta a query SQL para obter o valor da coluna PDF
         String query = "SELECT " + coluna +" FROM ameacas WHERE id = ?";
         PreparedStatement stmt = conexao.prepareStatement(query);
         stmt.setInt(1, ameaca.getId());
         
         ResultSet resultado = stmt.executeQuery();
         
-        // Lê o conteúdo da coluna PDF e grava em um arquivo
         if (resultado.next()) {
             InputStream input = resultado.getBinaryStream(coluna);
             FileOutputStream output = new FileOutputStream(nomeArquivo);
@@ -331,7 +328,6 @@ public class AmeacaRepository extends RepositoryBase {
             System.out.println("Não foi encontrado o registro com id = " + ameaca.getId());
         }
         
-        // Fecha a conexão com o banco de dados
         conexao.close();
 	}
 	
@@ -382,7 +378,6 @@ public class AmeacaRepository extends RepositoryBase {
 		
 		try{
 	          FileOutputStream fileOutput = new FileOutputStream("arquivoExportado.bin");
-	       // Criar um ObjectOutputStream para escrever os objetos no arquivo binário
 	            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutput);
 
 	            System.out.println(ameacas.get(1).getPathCorrecao());
@@ -398,10 +393,8 @@ public class AmeacaRepository extends RepositoryBase {
 	            	
 	            	ameaca.setConsequencia(consequencia.toFile());
 	            }
-	            // Escrever o objeto no arquivo binário
-	            objectOutputStream.writeObject(ameacas);
 
-	            // Fechar o ObjectOutputStream
+	            objectOutputStream.writeObject(ameacas);
 	            objectOutputStream.close();
 
 	            System.out.println("Dados exportados com sucesso!");
@@ -414,8 +407,9 @@ public class AmeacaRepository extends RepositoryBase {
 	public Iterable<Ameaca> ler(File pathName){
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		
-		String extensao = pathName.getPath().substring(pathName.getPath().lastIndexOf(".") + 1);
-		extensao.intern();
+		String extensao = pathName.getPath().substring(pathName.getPath().lastIndexOf(".") + 1).intern();
+		
+		System.out.println(extensao);
 		
 		if(extensao == "bin") {
 			try {
@@ -486,19 +480,14 @@ public class AmeacaRepository extends RepositoryBase {
 	
 	public Iterable<Ameaca> importarBin (File file){
 		 try {
-	            // Criar um FileInputStream para ler o arquivo binário
 	            FileInputStream fileInputStream = new FileInputStream(file);
 	
-	            // Criar um ObjectInputStream para ler os objetos do arquivo binário
 	            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 	
-	            // Ler o objeto do arquivo binário
 	            ArrayList<Ameaca> lista = (ArrayList<Ameaca>) objectInputStream.readObject();
 	
-	            // Fechar o ObjectInputStream
 	            objectInputStream.close();
-	
-	            // Utilizar o ArrayList importado
+	            
 	            for (Ameaca item : lista) {
 	                  this.criarAmeaca(item);
 	            }

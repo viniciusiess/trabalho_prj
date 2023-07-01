@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 import entities.Ameaca;
 import repositories.AmeacaRepository;
 
 public class AmeacaService {
 	private AmeacaRepository ameacaRepository = new AmeacaRepository();
+    ArrayList<String> ameacas = new ArrayList<String>();
 
 	  public void inserir(Ameaca ameaca) {
 		  System.out.println("Salvando....");
