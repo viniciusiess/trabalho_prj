@@ -39,6 +39,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import javax.swing.UIManager;
 /**
  *
  * @author Vinicius
@@ -118,26 +119,26 @@ public class Cad_ameaca extends javax.swing.JDialog {
         aConsequencia = new javax.swing.JTextField();
         buttonConfirmar = new javax.swing.JButton();
         buttonConfirmar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        buttonConfirmar.setBackground(Color.DARK_GRAY);
-        buttonConfirmar.setForeground(new Color(255, 255, 255));
+        buttonConfirmar.setBackground(UIManager.getColor("Button.background"));
+        buttonConfirmar.setForeground(UIManager.getColor("Button.foreground"));
         buttonConfirmar.setFont(new Font("Inter SemiBold", Font.PLAIN, 11));
         buttonSolucao = new javax.swing.JButton();
         buttonSolucao.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         buttonSolucao.setHorizontalAlignment(SwingConstants.LEFT);
-        buttonSolucao.setBackground(Color.DARK_GRAY);
-        buttonSolucao.setForeground(new Color(255, 255, 255));
+        buttonSolucao.setBackground(UIManager.getColor("Button.background"));
+        buttonSolucao.setForeground(UIManager.getColor("Button.foreground"));
         buttonSolucao.setFont(new Font("Inter SemiBold", Font.PLAIN, 11));
         buttonPathCorrecao = new javax.swing.JButton();
         buttonPathCorrecao.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         buttonPathCorrecao.setHorizontalAlignment(SwingConstants.LEFT);
-        buttonPathCorrecao.setBackground(Color.DARK_GRAY);
-        buttonPathCorrecao.setForeground(new Color(255, 255, 255));
+        buttonPathCorrecao.setBackground(UIManager.getColor("Button.background"));
+        buttonPathCorrecao.setForeground(UIManager.getColor("Button.foreground"));
         buttonPathCorrecao.setFont(new Font("Inter SemiBold", Font.PLAIN, 11));
         buttonConsequencia = new javax.swing.JButton();
         buttonConsequencia.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         buttonConsequencia.setHorizontalAlignment(SwingConstants.LEFT);
-        buttonConsequencia.setBackground(Color.DARK_GRAY);
-        buttonConsequencia.setForeground(new Color(255, 255, 255));
+        buttonConsequencia.setBackground(UIManager.getColor("Button.background"));
+        buttonConsequencia.setForeground(UIManager.getColor("Button.foreground"));
         buttonConsequencia.setFont(new Font("Inter SemiBold", Font.PLAIN, 11));
         jLabel1 = new javax.swing.JLabel();
         jLabel1.setForeground(Color.WHITE);
