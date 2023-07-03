@@ -3,6 +3,8 @@
 
 <p>Projeto criado pelos alunos Vinicius Siess e Lucas Braz, pela disciplina de PRJ Noite da FAETERJ Petrópolis lecionado pelo professor Mozar Silva</p>
 
+<p>Versão: Java SE Development Kit 17.0.7</p>
+
 <h4>rode o seguinte comando para clonar o projeto na sua máquima: git clone https://github.com/viniciusiess/trabalho_prj.git</h4>
 
 <h3>Como rodar?</h3>
